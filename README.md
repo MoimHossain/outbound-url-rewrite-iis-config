@@ -8,13 +8,23 @@ The changes in ```web.config``` looks like following:
       <!- Creating Rewrite rules -->
       <rewrite>
         <outboundRules>          
-          <!-- The below rule captures a 302 (redirect) response with 'Location' response header contains an outbound URL (coming from the web app) 
-               that has 'signin-oidc' in the path.  When there are 'signin-oidc' present into the path, it will match the regular expression
-               and rewrite the Location header with the hostname that comes from your front-door/application gateway URL. The notion {R:2} preserves any following
-               query parameters or sub path that was present in the original URL -->
+          <!-- The below rule captures a 302 (redirect) response 
+               with 'Location' response header contains 
+               an outbound URL (coming from the web app) 
+               that has 'signin-oidc' in the path.  
+               When there are 'signin-oidc' present into the path, it 
+               will match the regular expression and rewrite the Location 
+               header with the hostname that comes from 
+               your front-door/application gateway URL. The notion {R:2} preserves 
+               any following query parameters or sub path that was 
+               present in the original URL -->
           <rule name="changeURI" enabled="true">
-            <match serverVariable="RESPONSE_Location" pattern="^(.*)/signin-oidc(.+)" ignoreCase="true" />
-            <action type="Rewrite" value="https://my-waf.azureafd.net/signin-oidc{R:2}" />
+            <match 
+                serverVariable="RESPONSE_Location" 
+                pattern="^(.*)/signin-oidc(.+)" 
+                ignoreCase="true" />
+            <action type="Rewrite" 
+                value="https://my-waf.azureafd.net/signin-oidc{R:2}" />
           </rule>          
         </outboundRules>
       </rewrite>      
@@ -55,9 +65,12 @@ The following rule example demonstrates how back-references are created and refe
 <rule name="Rewrite subdomain">
  <match url="^(.+)" /> <!-- rule back-reference is captured here -->
  <conditions>
-  <add input="{HTTP_HOST}" type="Pattern" pattern="^([^.]+)\.mysite\.com$" /> <!-- condition back-reference is captured here -->
+  <!-- condition back-reference is captured here -->
+  <add input="{HTTP_HOST}" type="Pattern" pattern="^([^.]+)\.mysite\.com$" /> 
  </conditions>
- <action type="Rewrite" url="{C:1}/{R:1}" /> <!-- rewrite action uses back-references to condition and to rule when rewriting the url -->
+ <!-- rewrite action uses back-references to condition and 
+      to rule when rewriting the url -->
+ <action type="Rewrite" url="{C:1}/{R:1}" /> 
 </rule>
 ```
 
