@@ -76,7 +76,7 @@ The following rule example demonstrates how back-references are created and refe
 
 ## How to create and test these pattern (with RegEx)?
 
-Check out this (Microsoft Documentation](https://docs.microsoft.com/en-us/iis/extensions/url-rewrite-module/testing-rewrite-rule-patterns) how to use the **Test pattern** tool that comes with IIS installation.
+Check out this [Microsoft Documentation](https://docs.microsoft.com/en-us/iis/extensions/url-rewrite-module/testing-rewrite-rule-patterns) how to use the **Test pattern** tool that comes with IIS installation.
 
 ![How to create and test patterns](./example.png "Screenshot of Pattern test tool")
 
