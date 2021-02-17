@@ -1,7 +1,7 @@
 # Outbound URI rewrite with IIS 
-An example repo that shows how to rewrite IIS URL (outbound) to configure legacy asp.net web apps hosted on Azure App Service but safeguarded with a WAF (Front-door/Application Gateway)
+An example repo that shows how to rewrite IIS URL (outbound) to configure legacy asp.net web apps hosted on Azure App Service but safeguarded with a WAF (Front-door/Application Gateway). Setting up Azure Front-door or Azure Application Gateway are fairly straight forward process and well documented in Microsoft Azure Docs. That is beyond the scope of this repository. However, when you deploy a legacy asp.net application that uses either OAuth 2.0/Open ID connect based authentications or OWIN based authentication middleware you often run into a broken authN flow because the application might not care about the front-door/gateway host-headers and produces a reditect (302 permanent) to a path that constructed based on App service URI's - as oppose to the front-door/gateway URI. Once can of course fix this by changing the code - but that sometimes might not be practical/possible. Other alternative approach (which is described below) is to catch one or more specific outbound URIs (the redirect flows) in a ```web.config``` file and use the IIS URL rewrite module to overwrite them accordingly. That would require changes in ```web.config``` but not the source codes. Which is rather cleaner approach as you can do that even from the source control managment (KUDO) sites. 
 
-## Sample ```Web.config```
+## Sample ```Web.config``` with IIS URI rewrite
 The changes in ```web.config``` looks like following:
 
 ```
